@@ -57,9 +57,6 @@ services:
       HISTORY_RETENTION_DAYS: ${HISTORY_RETENTION_DAYS:-0}
       MIGRATE_ON_START: ${MIGRATE_ON_START:-true}
       TZ: ${TZ:-Asia/Jakarta}
-    volumes:
-      - ./backend/dist:/app/backend/dist:ro
-      - ./shared/dist:/app/shared/dist:ro
     depends_on:
       database:
         condition: service_healthy
