@@ -23,10 +23,11 @@ class HistoryWriter {
     this.scheduleTimer();
 
     if (env.HISTORY_RETENTION_DAYS > 0) {
-      console.log(`🧹 Data retention cleanup active: ${env.HISTORY_RETENTION_DAYS} days`);
+      console.log(`🧹 Data retention cleanup active: ${env.HISTORY_RETENTION_DAYS} day(s)`);
+      this.runRetention();
       this.retentionTimer = setInterval(() => {
         this.runRetention();
-      }, 3600 * 1000);
+      }, 30 * 60 * 1000);
     }
   }
 

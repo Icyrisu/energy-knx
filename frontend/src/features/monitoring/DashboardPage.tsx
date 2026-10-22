@@ -3,7 +3,6 @@ import { Activity, Zap } from 'lucide-react';
 import { Card } from '../../components/ui/card';
 import { useLiveTelemetry } from '../../hooks/useLiveTelemetry';
 import { formatNumber } from '../../lib/utils';
-import { EnergySummaryCards } from './EnergySummaryCards';
 import { MeterPanel } from './MeterPanel';
 import { PowerTrendCard } from './PowerTrendCard';
 
@@ -87,14 +86,9 @@ export const DashboardPage: React.FC = () => {
         <MeterPanel snapshot={meterKecil} />
       </div>
 
-      {/* Bottom Row: Power Trend Chart & Energy Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-        <div className="lg:col-span-2">
-          <PowerTrendCard />
-        </div>
-        <div className="lg:col-span-1">
-          <EnergySummaryCards />
-        </div>
+      {/* Bottom Row: Power Trend Chart */}
+      <div>
+        <PowerTrendCard />
       </div>
     </div>
   );

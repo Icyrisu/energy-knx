@@ -298,6 +298,7 @@ export const sampleRepo = {
     if (days <= 0) return 0;
     const cutoff = new Date(Date.now() - days * 24 * 3600 * 1000);
     const res = await pool.query('DELETE FROM telemetry_samples WHERE ts < $1', [cutoff]);
+    await pool.query('DELETE FROM control_log WHERE ts < $1', [cutoff]).catch(() => {});
     return res.rowCount ?? 0;
   },
 };
