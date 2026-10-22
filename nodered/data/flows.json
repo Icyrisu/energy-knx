@@ -24,9 +24,10 @@
         "id": "tab_simulator",
         "type": "tab",
         "label": "3. 3-Phase Simulator",
-        "disabled": false,
+        "disabled": true,
         "info": "Simulator 28 parameter listrik realistis. Aktif jika ENERGY_SOURCE_MODE=simulation."
     },
+
     {
         "id": "tab_sender",
         "type": "tab",
@@ -43,9 +44,10 @@
         "stateLogEnabled": false,
         "queueLogEnabled": false,
         "failureLogEnabled": true,
-        "tcpHost": "127.0.0.1",
-        "tcpPort": 502,
+        "tcpHost": "${MODBUS_HOST}",
+        "tcpPort": "${MODBUS_PORT}",
         "tcpType": "DEFAULT",
+
         "serialPort": "/dev/ttyUSB",
         "serialType": "RTU-BUFFERD",
         "serialBaudrate": 9600,
@@ -96,6 +98,7 @@
         "name": "📋 Register Map (READ & WRITE)",
         "func": "/**\n * ==========================================================================\n * TABEL REGISTER MAP MODBUS TCP\n * ==========================================================================\n * Panduan Penambahan Register:\n * \n * 1. Bagian READ (Pemantauan):\n *    - meter: 'kwh-besar' atau 'kwh-kecil'\n *    - unitId: Modbus Slave / Unit ID (default: 1 untuk BESAR, 2 untuk KECIL)\n *    - key: parameter (voltageR, voltageS, voltageT, currentR, currentS, currentT,\n *           wattR, wattS, wattT, kwhR, kwhS, kwhT, totalWatt, totalKwh)\n *    - fc: Function Code (3 = Read Holding Registers, 4 = Read Input Registers)\n *    - address: Alamat register awal (0-based atau sesuai manual meter).\n *               Jika masih null, meter belum akan dibaca (tidak ada data palsu).\n *    - type: 'float32' | 'uint32' | 'int32' | 'uint16' | 'int16'\n *    - wordSwap: true jika word urutan CDAB (little-endian word order)\n *    - scale: Faktor pengali nilai engineering (contoh: 0.1 jika meter kirim 2200 = 220V)\n * \n * 2. Bagian WRITE (Kontrol Dua Arah):\n *    - tag: ID unik kontrol (contoh: 'relay-1', 'power-limit')\n *    - label: Nama tampilan yang muncul di menu Dashboard Control\n *    - unitId: Modbus Slave ID\n *    - fc: 5 = Write Single Coil, 6 = Write Single Register, 16 = Write Multi Registers\n *    - address: Alamat register/coil tujuan\n *    - type: 'bool' (ON/OFF switch) | 'uint16' | 'int16' | 'float32'\n *    - scale, min, max, unit: Opsi untuk kontrol numerik\n * ==========================================================================\n */\n\nconst READ = [\n  // --- KWH BESAR (Meter 1, Unit ID 1) ---\n  { meter: 'kwh-besar', unitId: 1, key: 'voltageR', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'voltageS', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'voltageT', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'currentR', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'currentS', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'currentT', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'wattR',    fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'wattS',    fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'wattT',    fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'kwhR',     fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'kwhS',     fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'kwhT',     fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'totalWatt',fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-besar', unitId: 1, key: 'totalKwh', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n\n  // --- KWH KECIL (Meter 2, Unit ID 2) ---\n  { meter: 'kwh-kecil', unitId: 2, key: 'voltageR', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'voltageS', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'voltageT', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'currentR', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'currentS', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'currentT', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'wattR',    fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'wattS',    fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'wattT',    fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'kwhR',     fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'kwhS',     fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'kwhT',     fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'totalWatt',fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 },\n  { meter: 'kwh-kecil', unitId: 2, key: 'totalKwh', fc: 3, address: null, type: 'float32', wordSwap: false, scale: 1.0 }\n];\n\nconst WRITE = [\n  { tag: 'lamp-1', label: 'Lamp 1', meterId: 'kwh-besar', unitId: 1, fc: 5, address: 10, type: 'bool', description: 'Lamp 1 lighting circuit (Coil 10)' },\n  { tag: 'lamp-2', label: 'Lamp 2', meterId: 'kwh-besar', unitId: 1, fc: 5, address: 11, type: 'bool', description: 'Lamp 2 lighting circuit (Coil 11)' }\n];\n\nglobal.set('modbusMap', { READ, WRITE });\n\nconst configuredCount = READ.filter(r => r.address !== null).length;\nnode.status({ fill: configuredCount > 0 ? 'green' : 'yellow', shape: 'dot', text: 'Map loaded: ' + configuredCount + '/28 read registers set, ' + WRITE.length + ' write points' });\nreturn null;",
         "outputs": 0,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -135,7 +138,6 @@
         "z": "tab_modbus_read",
         "name": "Scheduler & Register Guard",
         "func": "const env = global.get('env') || {};\nif (env.ENERGY_SOURCE_MODE !== 'device' && env.ENERGY_SOURCE_MODE !== 'modbus') {\n  node.status({ fill: 'grey', shape: 'dot', text: 'Modbus mode idle (' + env.ENERGY_SOURCE_MODE + ')' });\n  return null;\n}\n\nconst map = global.get('modbusMap') || { READ: [] };\nconst activeRegisters = map.READ.filter(r => r && r.address !== null && r.address !== undefined);\n\nif (activeRegisters.length === 0) {\n  node.status({ fill: 'yellow', shape: 'ring', text: 'Register belum di-set (address: null)' });\n  return null;\n}\n\nnode.status({ fill: 'blue', shape: 'dot', text: 'Polling ' + activeRegisters.length + ' registers...' });\n\n// Generate read requests for flex-getter\nconst msgs = activeRegisters.map(reg => {\n  let qty = 1;\n  if (reg.type === 'float32' || reg.type === 'int32' || reg.type === 'uint32') {\n    qty = 2;\n  }\n  return {\n    payload: {\n      value: '',\n      unitid: reg.unitId,\n      fc: reg.fc || 3,\n      address: reg.address,\n      quantity: qty\n    },\n    meta: reg\n  };\n});\n\nreturn [msgs];",
-
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -267,7 +269,6 @@
         "z": "tab_modbus_write",
         "name": "Validate & Build Flex-Write",
         "func": "const env = global.get('env') || {};\nconst reqSecret = (msg.req && msg.req.headers['x-internal-secret']) || '';\n\nif (reqSecret !== (env.INTERNAL_API_SECRET || '')) {\n  msg.statusCode = 401;\n  msg.payload = { success: false, error: 'Unauthorized: invalid internal secret' };\n  node.status({ fill: 'red', shape: 'ring', text: '401 Unauthorized' });\n  return [null, msg];\n}\n\nconst body = msg.payload || {};\nconst tag = body.tag;\nconst val = body.value;\n\nif (!tag || val === undefined) {\n  msg.statusCode = 400;\n  msg.payload = { success: false, error: 'Missing tag or value in request' };\n  return [null, msg];\n}\n\nconst envMode = env.ENERGY_SOURCE_MODE || 'modbus';\nif (envMode === 'simulation') {\n  node.status({ fill: 'green', shape: 'dot', text: 'Sim write: ' + tag + ' = ' + val });\n  msg.statusCode = 200;\n  msg.payload = {\n    success: true,\n    message: 'Simulated write to ' + tag + ' (' + val + ') successful',\n    tag: tag,\n    value: val\n  };\n  return [null, msg];\n}\n\nconst map = global.get('modbusMap') || { WRITE: [] };\nconst point = (map.WRITE || []).find(p => p.tag === tag);\n\nif (!point) {\n  msg.statusCode = 404;\n  msg.payload = { success: false, error: 'Control point tag \"' + tag + '\" not found in Register Map' };\n  return [null, msg];\n}\n\nlet encodedValue = val;\nlet qty = 1;\n\nif (point.type === 'bool') {\n  encodedValue = Boolean(val);\n} else if (point.type === 'float32') {\n  qty = 2;\n  const numVal = Number(val) / (point.scale || 1.0);\n  const buf = Buffer.alloc(4);\n  buf.writeFloatBE(numVal, 0);\n  const w1 = buf.readUInt16BE(0);\n  const w2 = buf.readUInt16BE(2);\n  encodedValue = point.wordSwap ? [w2, w1] : [w1, w2];\n} else {\n  const numVal = Math.round(Number(val) / (point.scale || 1.0));\n  encodedValue = numVal;\n}\n\nmsg.pointTag = tag;\nmsg.pointValue = val;\nmsg.payload = {\n  value: encodedValue,\n  unitid: point.unitId || 1,\n  fc: point.fc || 16,\n  address: point.address,\n  quantity: qty\n};\n\nnode.status({ fill: 'blue', shape: 'dot', text: 'Writing ' + tag + ' = ' + val });\nreturn [msg, null];",
-
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -435,15 +436,16 @@
                 "p": "payload"
             }
         ],
-        "repeat": "1",
+        "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": "1",
         "topic": "",
         "payload": "",
         "payloadType": "date",
         "x": 120,
         "y": 120,
+
         "wires": [
             [
                 "sim_generator"
