@@ -52,7 +52,7 @@ export const Sidebar: React.FC<SidebarProps> = memo(({
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="font-bold text-sm text-slate-100 tracking-tight leading-none truncate">
-                  Energy SCADA
+                  Energy Portal
                 </span>
                 <span className="text-[11px] text-slate-400 font-medium truncate mt-1">
                   Power &amp; Energy
@@ -143,19 +143,12 @@ export const Sidebar: React.FC<SidebarProps> = memo(({
         </div>
       </div>
 
-      {/* Footer Info / Version */}
-      <div className="p-3 border-t border-[#1f2024] text-[11px] text-slate-600">
-        {showExpanded ? (
-          <div className="flex items-center justify-between px-2">
-            <span>SCADA System</span>
-            <span className="font-mono text-[10px] text-slate-500">v2.4</span>
-          </div>
-        ) : (
-          <div className="text-center font-mono text-[10px] text-slate-600">
-            v2.4
-          </div>
-        )}
-      </div>
+      {/* Footer Info */}
+      {showExpanded && (
+        <div className="p-3 border-t border-[#1f2024] text-[11px] text-slate-500 px-4">
+          Power &amp; Energy Monitoring
+        </div>
+      )}
     </div>
   );
 };

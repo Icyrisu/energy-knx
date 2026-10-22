@@ -129,7 +129,7 @@ export const PowerTrendCard: React.FC = () => {
     },
     series: [
       {
-        name: 'KWH BESAR',
+        name: 'Power Meter 1',
         type: 'line',
         smooth: 0.3,
         showSymbol: false,
@@ -144,7 +144,7 @@ export const PowerTrendCard: React.FC = () => {
         },
       },
       {
-        name: 'KWH KECIL',
+        name: 'Power Meter 2',
         type: 'line',
         smooth: 0.3,
         showSymbol: false,
@@ -164,7 +164,7 @@ export const PowerTrendCard: React.FC = () => {
   const presets: TimeRangePreset[] = ['1H', '6H', '24H', '7D', '30D'];
 
   return (
-    <Card className="p-5 sm:p-6 bg-white dark:bg-[#141519] border-slate-200/80 dark:border-[#27272a] shadow-xs flex flex-col justify-between">
+    <Card className="p-5 sm:p-6 bg-white dark:bg-[#141519] border border-slate-200/80 dark:border-[#27272a] shadow-xs flex flex-col justify-between">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-[#27272a]">
         <div>
@@ -180,12 +180,12 @@ export const PowerTrendCard: React.FC = () => {
           {/* Legend */}
           <div className="flex items-center gap-3 text-xs font-medium">
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-blue-500" />
-              <span>KWH BESAR</span>
+              <span className="w-2 h-2 rounded-full bg-[#aef31e]" />
+              <span>Power Meter 1</span>
             </div>
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>KWH KECIL</span>
+              <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
+              <span>Power Meter 2</span>
             </div>
           </div>
 

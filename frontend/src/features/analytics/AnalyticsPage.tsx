@@ -166,7 +166,7 @@ export const AnalyticsPage: React.FC = () => {
       const dataMap = new Map(s.data.map((d) => [d.timestamp, d.value]));
 
       return {
-        name: `${s.meterId === 'kwh-besar' ? 'KWH BESAR' : 'KWH KECIL'} · ${s.parameter} (${s.unit})`,
+        name: `${s.meterId === 'kwh-besar' ? 'Power Meter 1' : 'Power Meter 2'} · ${s.parameter} (${s.unit})`,
         type: 'line',
         smooth: 0.3,
         showSymbol: allTimestamps.length <= 2,
@@ -284,7 +284,7 @@ export const AnalyticsPage: React.FC = () => {
                     : 'bg-transparent text-slate-400 border-slate-200 dark:border-zinc-800'
                 )}
               >
-                KWH BESAR
+                Power Meter 1
               </button>
               <button
                 onClick={() => toggleMeter('kwh-kecil')}
@@ -295,7 +295,7 @@ export const AnalyticsPage: React.FC = () => {
                     : 'bg-transparent text-slate-400 border-slate-200 dark:border-zinc-800'
                 )}
               >
-                KWH KECIL
+                Power Meter 2
               </button>
             </div>
 
@@ -402,8 +402,8 @@ export const AnalyticsPage: React.FC = () => {
               className="bg-slate-100 dark:bg-[#1f2024] border border-slate-200 dark:border-[#27272a] rounded-lg text-xs font-semibold px-3 py-1.5 text-slate-900 dark:text-white outline-none cursor-pointer"
             >
               <option value="">All Meters</option>
-              <option value="kwh-besar">KWH BESAR</option>
-              <option value="kwh-kecil">KWH KECIL</option>
+              <option value="kwh-besar">Power Meter 1</option>
+              <option value="kwh-kecil">Power Meter 2</option>
             </select>
 
             <Button
@@ -462,7 +462,7 @@ export const AnalyticsPage: React.FC = () => {
                       {formatDateTime(row.timestamp)}
                     </TableCell>
                     <TableCell className="font-medium text-xs text-slate-900 dark:text-slate-200">
-                      {row.meterId === 'kwh-besar' ? 'KWH BESAR' : 'KWH KECIL'}
+                      {row.meterId === 'kwh-besar' ? 'Power Meter 1' : 'Power Meter 2'}
                     </TableCell>
                     <TableCell className="text-right font-mono text-xs tabular-nums">{formatNumber(row.voltageR, 1)}</TableCell>
                     <TableCell className="text-right font-mono text-xs tabular-nums">{formatNumber(row.voltageS, 1)}</TableCell>

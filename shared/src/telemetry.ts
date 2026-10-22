@@ -79,6 +79,7 @@ export type WebSocketServerMessage =
   | { type: 'telemetry'; payload: MeterLiveSnapshot }
   | { type: 'meter-status'; payload: { meterId: string; status: ConnectionStatus; isStale: boolean; timestamp: string } }
   | { type: 'alarm'; payload: { id: number; meterId: string; parameter: string; severity: string; status: string; message: string; raisedAt: string } }
+  | { type: 'control-update'; payload: { tag: string; value: number | boolean; timestamp: string } }
   | { type: 'ping' };
 
 export const controlWriteSchema = z.object({

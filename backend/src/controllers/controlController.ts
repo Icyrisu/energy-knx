@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { controlRepo } from '../repositories/controlRepo.js';
 import { noderedClient } from '../services/noderedClient.js';
+import { wsServer } from '../websocket/wsServer.js';
 
 export async function getControlPoints(_req: Request, res: Response): Promise<void> {
   const points = await noderedClient.getPoints();
@@ -17,6 +18,16 @@ export async function writeControlPoint(req: Request, res: Response): Promise<vo
   try {
     const result = await noderedClient.write(tag, value);
     await controlRepo.insertLog(tag, numericVal, true);
+
+    // Broadcast in real-time to ALL connected WebSocket clients (phones, laptops, tablets)
+    wsServer.broadcast({
+      type: 'control-update',
+      payload: {
+        tag,
+        value,
+        timestamp: new Date().toISOString(),
+      },
+    });
 
     res.json({
       success: true,

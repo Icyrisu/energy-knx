@@ -57,13 +57,13 @@ export interface MeterMetadata {
 export const KNOWN_METERS: Record<MeterId, MeterMetadata> = {
   'kwh-besar': {
     id: 'kwh-besar',
-    name: 'KWH BESAR',
+    name: 'Power Meter 1',
     tag: 'Meter 1',
     sortOrder: 1,
   },
   'kwh-kecil': {
     id: 'kwh-kecil',
-    name: 'KWH KECIL',
+    name: 'Power Meter 2',
     tag: 'Meter 2',
     sortOrder: 2,
   },

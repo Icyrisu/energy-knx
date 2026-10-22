@@ -42,7 +42,7 @@ export const TotalTile: React.FC<TotalTileProps> = ({
           {label}
         </span>
         <div className="flex items-baseline gap-1.5 mt-0.5">
-          <span className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 tabular-nums">
+          <span className="text-xl sm:text-2xl font-normal tracking-tight text-slate-900 dark:text-slate-100 tabular-nums">
             {isOffline ? '—' : formatNumber(value, 1)}
           </span>
           <span className="text-xs font-medium text-slate-400">

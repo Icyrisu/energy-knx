@@ -27,7 +27,7 @@ export const Header: React.FC<HeaderProps> = memo(({ onMobileMenuToggle }) => {
       case '/settings':
         return 'Settings';
       default:
-        return 'Energy SCADA';
+        return 'Energy Portal';
     }
   };
 

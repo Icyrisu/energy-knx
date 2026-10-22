@@ -5,8 +5,8 @@
 -- Seed the two primary 3-phase meters
 INSERT INTO meters (id, name, tag, description, sort_order, enabled)
 VALUES
-  ('kwh-besar', 'KWH BESAR', 'Meter 1', 'Main incoming 3-phase power meter', 1, TRUE),
-  ('kwh-kecil', 'KWH KECIL', 'Meter 2', 'Sub-distribution 3-phase power meter', 2, TRUE)
+  ('kwh-besar', 'Power Meter 1', 'Meter 1', 'Main incoming 3-phase power meter', 1, TRUE),
+  ('kwh-kecil', 'Power Meter 2', 'Meter 2', 'Sub-distribution 3-phase power meter', 2, TRUE)
 ON CONFLICT (id) DO UPDATE SET
   name = EXCLUDED.name,
   tag = EXCLUDED.tag,

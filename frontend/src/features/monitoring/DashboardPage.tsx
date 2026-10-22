@@ -12,7 +12,7 @@ export const DashboardPage: React.FC = () => {
 
   const meterBesar = meters['kwh-besar'] || {
     meterId: 'kwh-besar',
-    meterName: 'KWH BESAR',
+    meterName: 'Power Meter 1',
     tag: 'Meter 1',
     connectionStatus: 'offline',
     source: 'simulation',
@@ -23,7 +23,7 @@ export const DashboardPage: React.FC = () => {
 
   const meterKecil = meters['kwh-kecil'] || {
     meterId: 'kwh-kecil',
-    meterName: 'KWH KECIL',
+    meterName: 'Power Meter 2',
     tag: 'Meter 2',
     connectionStatus: 'offline',
     source: 'simulation',
@@ -51,7 +51,7 @@ export const DashboardPage: React.FC = () => {
               Total Active Power
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
+              <span className="text-2xl sm:text-3xl font-normal text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
                 {combinedPower > 0 ? formatNumber(combinedPower, 1) : '—'}
               </span>
               <span className="text-xs font-semibold text-slate-400">W</span>
@@ -69,7 +69,7 @@ export const DashboardPage: React.FC = () => {
               Total Active Energy
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
+              <span className="text-2xl sm:text-3xl font-normal text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
                 {combinedEnergy > 0 ? formatNumber(combinedEnergy, 1) : '—'}
               </span>
               <span className="text-xs font-semibold text-slate-400">kWh</span>

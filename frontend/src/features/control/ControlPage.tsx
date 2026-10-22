@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table';
 import { formatDateTime } from '../../lib/utils';
 import { api } from '../../services/api';
+import { wsClient } from '../../services/websocket';
 import { PendantLampCard } from './PendantLampCard';
 
 interface ControlPointItem {
@@ -35,7 +36,7 @@ interface ControlLogItem {
   error?: string | null;
 }
 
-const STORAGE_KEY = 'scada_lamp_states';
+const STORAGE_KEY = 'energy_lamp_states';
 
 export const ControlPage: React.FC = () => {
   const [points, setPoints] = useState<ControlPointItem[]>([]);
@@ -92,6 +93,31 @@ export const ControlPage: React.FC = () => {
 
   useEffect(() => {
     loadData();
+
+    // Connect WebSocket and listen for real-time control updates across devices
+    wsClient.connect();
+    const unsub = wsClient.onMessage((msg) => {
+      if (msg.type === 'control-update') {
+        const { tag, value } = msg.payload;
+        const isLampOn = value === 1 || value === true;
+        setLampStates((prev) => {
+          const next = { ...prev, [tag]: isLampOn };
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+          } catch {
+            // ignore
+          }
+          return next;
+        });
+
+        // Automatically fetch latest audit logs so table stays in sync across all devices
+        api.getControlLogs().then(setLogs).catch(() => {});
+      }
+    });
+
+    return () => {
+      unsub();
+    };
   }, []);
 
   const handleToggleLamp = async (tag: string, nextState: boolean) => {
@@ -125,24 +151,27 @@ export const ControlPage: React.FC = () => {
   const fallbackLamps: ControlPointItem[] = [
     {
       tag: 'lamp-1',
-      label: 'Living Room Lamp',
+      label: 'Lamp 1',
       unitId: 1,
       fc: 5,
       address: 10,
       type: 'bool',
-      description: 'Living Room lighting circuit',
+      description: 'Lamp 1 lighting circuit',
     },
     {
       tag: 'lamp-2',
-      label: 'Kitchen Lamp',
+      label: 'Lamp 2',
       unitId: 1,
       fc: 5,
       address: 11,
       type: 'bool',
-      description: 'Kitchen lighting circuit',
+      description: 'Lamp 2 lighting circuit',
     },
   ];
-  const activeLamps = lampPoints.length === 2 ? lampPoints : fallbackLamps;
+  const activeLamps = (lampPoints.length === 2 ? lampPoints : fallbackLamps).map((lamp) => ({
+    ...lamp,
+    label: lamp.tag === 'lamp-1' ? 'Lamp 1' : lamp.tag === 'lamp-2' ? 'Lamp 2' : lamp.label,
+  }));
 
   return (
     <div className="space-y-6 max-w-[1600px] mx-auto">
@@ -234,7 +263,7 @@ export const ControlPage: React.FC = () => {
                         {formatDateTime(log.ts)}
                       </TableCell>
                       <TableCell className="font-mono text-xs font-medium text-slate-900 dark:text-slate-100">
-                        {log.tag === 'lamp-1' ? 'Living Room Lamp (lamp-1)' : log.tag === 'lamp-2' ? 'Kitchen Lamp (lamp-2)' : log.tag}
+                        {log.tag === 'lamp-1' ? 'Lamp 1 (lamp-1)' : log.tag === 'lamp-2' ? 'Lamp 2 (lamp-2)' : log.tag}
                       </TableCell>
                       <TableCell className="text-right font-mono text-xs tabular-nums">
                         {log.value === 1 ? '1 (ON)' : log.value === 0 ? '0 (OFF)' : log.value}

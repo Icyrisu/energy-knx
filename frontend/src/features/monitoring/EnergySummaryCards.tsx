@@ -48,8 +48,8 @@ export const EnergySummaryCards: React.FC = () => {
         label: { show: false },
         emphasis: { label: { show: false } },
         data: [
-          { value: ratioBesar, name: 'KWH BESAR', itemStyle: { color: '#aef31e' } },
-          { value: ratioKecil, name: 'KWH KECIL', itemStyle: { color: '#38bdf8' } },
+          { value: ratioBesar, name: 'Power Meter 1', itemStyle: { color: '#aef31e' } },
+          { value: ratioKecil, name: 'Power Meter 2', itemStyle: { color: '#38bdf8' } },
         ],
       },
     ],
@@ -69,18 +69,18 @@ export const EnergySummaryCards: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#aef31e]" />
-              <span className="text-slate-500 dark:text-slate-400">KWH BESAR</span>
+              <span className="text-slate-500 dark:text-slate-400">Power Meter 1</span>
             </div>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">
+            <span className="font-normal text-slate-900 dark:text-slate-100 tabular-nums">
               {formatNumber(energyBesar, 1)} <span className="text-[11px] font-normal text-slate-400">kWh</span>
             </span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
-              <span className="text-slate-500 dark:text-slate-400">KWH KECIL</span>
+              <span className="text-slate-500 dark:text-slate-400">Power Meter 2</span>
             </div>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">
+            <span className="font-normal text-slate-900 dark:text-slate-100 tabular-nums">
               {formatNumber(energyKecil, 1)} <span className="text-[11px] font-normal text-slate-400">kWh</span>
             </span>
           </div>
@@ -99,18 +99,18 @@ export const EnergySummaryCards: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#aef31e]" />
-              <span className="text-slate-500 dark:text-slate-400">KWH BESAR</span>
+              <span className="text-slate-500 dark:text-slate-400">Power Meter 1</span>
             </div>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">
+            <span className="font-normal text-slate-900 dark:text-slate-100 tabular-nums">
               {formatNumber(powerBesar, 1)} <span className="text-[11px] font-normal text-slate-400">W</span>
             </span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
-              <span className="text-slate-500 dark:text-slate-400">KWH KECIL</span>
+              <span className="text-slate-500 dark:text-slate-400">Power Meter 2</span>
             </div>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">
+            <span className="font-normal text-slate-900 dark:text-slate-100 tabular-nums">
               {formatNumber(powerKecil, 1)} <span className="text-[11px] font-normal text-slate-400">W</span>
             </span>
           </div>
@@ -130,16 +130,16 @@ export const EnergySummaryCards: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#aef31e]" />
-                <span className="text-slate-500 dark:text-slate-400">BESAR</span>
+                <span className="text-slate-500 dark:text-slate-400">Meter 1</span>
               </div>
-              <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">{ratioBesar}%</span>
+              <span className="font-normal text-slate-900 dark:text-slate-100 tabular-nums">{ratioBesar}%</span>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
-                <span className="text-slate-500 dark:text-slate-400">KECIL</span>
+                <span className="text-slate-500 dark:text-slate-400">Meter 2</span>
               </div>
-              <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">{ratioKecil}%</span>
+              <span className="font-normal text-slate-900 dark:text-slate-100 tabular-nums">{ratioKecil}%</span>
             </div>
           </div>
 

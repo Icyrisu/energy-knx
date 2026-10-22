@@ -5,14 +5,14 @@ import { Sidebar } from './Sidebar';
 
 export const AppLayout: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
-    return localStorage.getItem('scada-sidebar-collapsed') === 'true';
+    return localStorage.getItem('energy-sidebar-collapsed') === 'true';
   });
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   const toggleCollapse = useCallback(() => {
     setIsCollapsed((prev) => {
       const next = !prev;
-      localStorage.setItem('scada-sidebar-collapsed', String(next));
+      localStorage.setItem('energy-sidebar-collapsed', String(next));
       return next;
     });
   }, []);

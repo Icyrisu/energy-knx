@@ -12,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    const saved = localStorage.getItem('energy-scada-theme');
+    const saved = localStorage.getItem('energy-theme');
     if (saved === 'light' || saved === 'dark') return saved;
     return 'dark'; // Clean dark mode default
   });
@@ -26,8 +26,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.classList.add('light');
       root.classList.remove('dark');
     }
-    localStorage.setItem('energy-scada-theme', theme);
-    window.dispatchEvent(new CustomEvent('scada-theme-change', { detail: { theme } }));
+    localStorage.setItem('energy-theme', theme);
+    window.dispatchEvent(new CustomEvent('energy-theme-change', { detail: { theme } }));
   }, [theme]);
 
   const toggleTheme = () => {
