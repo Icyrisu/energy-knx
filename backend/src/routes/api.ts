@@ -4,6 +4,7 @@ import {
   getActiveAlarms,
   getAlarmHistory,
   getAlarmRules,
+  updateAlarmRule,
 } from '../controllers/alarmsController.js';
 import { getHealth } from '../controllers/healthController.js';
 import { exportCsv, getHistory } from '../controllers/historyController.js';
@@ -12,23 +13,13 @@ import {
   getMeterLatest,
   getMeters,
   getMonitoringLatest,
+  updateMeter,
 } from '../controllers/monitoringController.js';
-import { getSettings } from '../controllers/settingsController.js';
+import { getSettings, updateSetting } from '../controllers/settingsController.js';
 import { getTrends } from '../controllers/trendsController.js';
 import { controlRouter } from './control.js';
 
 export const apiRouter = Router();
-
-// Guard against mutation in Demo Mode
-const blockDemoMutation = (_req: Request, res: Response): void => {
-  res.status(403).json({
-    success: false,
-    error: {
-      code: 'DEMO_MODE_RESTRICTED',
-      message: 'Modification of system configuration is disabled in Demo Mode.',
-    },
-  });
-};
 
 // Control (Two-way Modbus)
 apiRouter.use('/control', controlRouter);
@@ -39,7 +30,7 @@ apiRouter.get('/health', getHealth);
 // Meters & Monitoring
 apiRouter.get('/meters', getMeters);
 apiRouter.get('/meters/:meterId', getMeterById);
-apiRouter.patch('/meters/:meterId', blockDemoMutation);
+apiRouter.patch('/meters/:meterId', updateMeter);
 apiRouter.get('/meters/:meterId/latest', getMeterLatest);
 apiRouter.get('/monitoring/latest', getMonitoringLatest);
 
@@ -55,8 +46,9 @@ apiRouter.get('/alarms', getActiveAlarms);
 apiRouter.get('/alarms/history', getAlarmHistory);
 apiRouter.post('/alarms/:id/acknowledge', acknowledgeAlarm);
 apiRouter.get('/alarms/rules', getAlarmRules);
-apiRouter.put('/alarms/rules/:id', blockDemoMutation);
+apiRouter.put('/alarms/rules/:id', updateAlarmRule);
 
 // Settings
 apiRouter.get('/settings', getSettings);
-apiRouter.put('/settings/:key', blockDemoMutation);
+apiRouter.put('/settings/:key', updateSetting);
+

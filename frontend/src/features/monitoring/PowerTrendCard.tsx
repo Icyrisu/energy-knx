@@ -134,12 +134,12 @@ export const PowerTrendCard: React.FC = () => {
         smooth: 0.3,
         showSymbol: false,
         data: seriesBesar?.data.map((d) => d.value ?? 0) || [2800, 3100, 2900, 3800, 4600, 5800, 6868],
-        itemStyle: { color: '#aef31e' },
-        lineStyle: { width: 2 },
+        itemStyle: { color: '#2f31f5' },
+        lineStyle: { width: 2.5, color: '#2f31f5' },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(174, 243, 30, 0.28)' },
-            { offset: 1, color: 'rgba(174, 243, 30, 0.0)' },
+            { offset: 0, color: 'rgba(47, 49, 245, 0.35)' },
+            { offset: 1, color: 'rgba(47, 49, 245, 0.0)' },
           ]),
         },
       },
@@ -149,12 +149,12 @@ export const PowerTrendCard: React.FC = () => {
         smooth: 0.3,
         showSymbol: false,
         data: seriesKecil?.data.map((d) => d.value ?? 0) || [1800, 1600, 1900, 2400, 2800, 3900, 5902],
-        itemStyle: { color: '#38bdf8' },
-        lineStyle: { width: 2 },
+        itemStyle: { color: '#dbf059' },
+        lineStyle: { width: 2.5, color: '#dbf059' },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(56, 189, 248, 0.22)' },
-            { offset: 1, color: 'rgba(56, 189, 248, 0.0)' },
+            { offset: 0, color: 'rgba(218, 240, 89, 0.28)' },
+            { offset: 1, color: 'rgba(218, 240, 89, 0.0)' },
           ]),
         },
       },
@@ -164,14 +164,14 @@ export const PowerTrendCard: React.FC = () => {
   const presets: TimeRangePreset[] = ['1H', '6H', '24H', '7D', '30D'];
 
   return (
-    <Card className="p-5 sm:p-6 bg-white dark:bg-[#141519] border border-slate-200/80 dark:border-[#27272a] shadow-xs flex flex-col justify-between">
+    <Card className="p-5 sm:p-6 bg-white dark:bg-[#18181b] border border-slate-200/80 dark:border-[#26262b] shadow-xs flex flex-col justify-between">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-[#27272a]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-[#26262b]">
         <div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-slate-100 tracking-tight">
+          <h3 className="font-bold text-base text-slate-900 dark:text-[#ffffff] tracking-tight">
             Power Trend
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-[#797979]">
             Active Power (W) — {preset === '24H' ? 'Last 24 Hours' : `Last ${preset}`}
           </p>
         </div>
@@ -180,26 +180,26 @@ export const PowerTrendCard: React.FC = () => {
           {/* Legend */}
           <div className="flex items-center gap-3 text-xs font-medium">
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-[#aef31e]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#2f31f5] shadow-xs shadow-[#2f31f5]/40" />
               <span>Power Meter 1</span>
             </div>
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#dbf059] shadow-xs shadow-[#dbf059]/40" />
               <span>Power Meter 2</span>
             </div>
           </div>
 
           {/* Time range preset buttons */}
-          <div className="flex items-center p-0.5 rounded-lg bg-slate-100 dark:bg-[#1f2024] border border-slate-200/80 dark:border-[#27272a]">
+          <div className="flex items-center p-0.5 rounded-lg bg-slate-100 dark:bg-[#131314] border border-slate-200/80 dark:border-[#26262b]">
             {presets.map((p) => (
               <button
                 key={p}
                 onClick={() => setPreset(p)}
                 className={cn(
-                  'px-2 py-1 rounded-md text-xs font-medium transition-all cursor-pointer',
+                  'px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer',
                   preset === p
-                    ? 'bg-white dark:bg-[#27272a] text-slate-900 dark:text-white shadow-xs font-semibold'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-[#2f31f5] text-white shadow-xs'
+                    : 'text-slate-500 dark:text-[#797979] hover:text-slate-900 dark:hover:text-white'
                 )}
               >
                 {p}
@@ -208,6 +208,7 @@ export const PowerTrendCard: React.FC = () => {
           </div>
         </div>
       </div>
+
 
       {/* Chart container */}
       <div className="h-64 sm:h-72 mt-2 w-full">

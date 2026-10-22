@@ -101,7 +101,7 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-[1200px] mx-auto">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 dark:border-[#27272a]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 dark:border-[#26262b]">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 flex items-center justify-center">
             <SettingsIcon className="w-4 h-4" />
@@ -126,7 +126,7 @@ export const SettingsPage: React.FC = () => {
 
       {/* Tabs Switcher */}
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'system' | 'alarms')}>
-        <TabsList className="bg-slate-100 dark:bg-[#18181b] border border-slate-200 dark:border-[#27272a]">
+        <TabsList className="bg-slate-100 dark:bg-[#18181b] border border-slate-200 dark:border-[#26262b]">
           <TabsTrigger value="system" className="text-xs font-medium">
             System &amp; Display
           </TabsTrigger>
@@ -140,7 +140,7 @@ export const SettingsPage: React.FC = () => {
       {activeTab === 'system' && (
         <div className="space-y-6">
           {/* Section: Meter Identities */}
-          <Card className="p-5 bg-white dark:bg-[#141519] border-slate-200/80 dark:border-[#27272a] shadow-xs space-y-4">
+          <Card className="p-5 bg-white dark:bg-[#18181b] border-slate-200/80 dark:border-[#26262b] shadow-xs space-y-4">
             <div className="flex items-center gap-2">
               <Cpu className="w-4 h-4 text-slate-400" />
               <h3 className="font-semibold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-wider">
@@ -152,7 +152,7 @@ export const SettingsPage: React.FC = () => {
               {meters.map((meter) => (
                 <div
                   key={meter.id}
-                  className="p-4 rounded-xl border border-slate-200/80 dark:border-[#27272a] bg-slate-50/70 dark:bg-[#18181b] space-y-3"
+                  className="p-4 rounded-xl border border-slate-200/80 dark:border-[#26262b] bg-slate-50/70 dark:bg-[#18181b] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-mono font-semibold text-emerald-600 dark:text-emerald-400">
@@ -169,7 +169,7 @@ export const SettingsPage: React.FC = () => {
                       type="text"
                       id={`name-${meter.id}`}
                       defaultValue={meter.name}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#27272a] bg-white dark:bg-[#141519] text-xs font-medium"
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#26262b] bg-white dark:bg-[#18181b] text-xs font-medium"
                     />
                   </div>
 
@@ -181,7 +181,7 @@ export const SettingsPage: React.FC = () => {
                       type="text"
                       id={`desc-${meter.id}`}
                       defaultValue={meter.description || ''}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#27272a] bg-white dark:bg-[#141519] text-xs font-medium"
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#26262b] bg-white dark:bg-[#18181b] text-xs font-medium"
                     />
                   </div>
 
@@ -204,7 +204,7 @@ export const SettingsPage: React.FC = () => {
           </Card>
 
           {/* Section: Display, Localization & Logging Interval */}
-          <Card className="p-5 bg-white dark:bg-[#141519] border-slate-200/80 dark:border-[#27272a] shadow-xs space-y-4">
+          <Card className="p-5 bg-white dark:bg-[#18181b] border-slate-200/80 dark:border-[#26262b] shadow-xs space-y-4">
             <div className="flex items-center gap-2">
               <Globe className="w-4 h-4 text-slate-400" />
               <h3 className="font-semibold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-wider">
@@ -214,7 +214,7 @@ export const SettingsPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
               {/* Telemetry Logging Interval (Flexible 1 min default) */}
-              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#27272a] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
+              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#26262b] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block">
                     Logging Interval
@@ -224,7 +224,7 @@ export const SettingsPage: React.FC = () => {
                 <select
                   value={settings.historyIntervalSeconds || 60}
                   onChange={(e) => handleUpdateSetting('historyIntervalSeconds', parseInt(e.target.value, 10))}
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#27272a] bg-white dark:bg-[#141519] text-xs font-medium outline-none cursor-pointer"
+                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#26262b] bg-white dark:bg-[#18181b] text-xs font-medium outline-none cursor-pointer"
                 >
                   <option value={10}>10 Seconds (High Freq)</option>
                   <option value={30}>30 Seconds</option>
@@ -238,14 +238,14 @@ export const SettingsPage: React.FC = () => {
               </div>
 
               {/* Display Timezone */}
-              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#27272a] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
+              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#26262b] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
                 <label className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block">
                   Display Timezone
                 </label>
                 <select
                   value={settings.displayTimezone}
                   onChange={(e) => handleUpdateSetting('displayTimezone', e.target.value)}
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#27272a] bg-white dark:bg-[#141519] text-xs font-medium outline-none cursor-pointer"
+                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#26262b] bg-white dark:bg-[#18181b] text-xs font-medium outline-none cursor-pointer"
                 >
                   <option value="Asia/Jakarta">Asia/Jakarta (WIB, UTC+7)</option>
                   <option value="Asia/Makassar">Asia/Makassar (WITA, UTC+8)</option>
@@ -258,7 +258,7 @@ export const SettingsPage: React.FC = () => {
               </div>
 
               {/* Stale Threshold */}
-              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#27272a] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
+              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#26262b] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
                 <label className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block">
                   Stale Data Timeout (Seconds)
                 </label>
@@ -268,7 +268,7 @@ export const SettingsPage: React.FC = () => {
                   max={60}
                   value={settings.staleAfterSeconds}
                   onChange={(e) => handleUpdateSetting('staleAfterSeconds', parseInt(e.target.value, 10))}
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#27272a] bg-white dark:bg-[#141519] text-xs font-medium tabular-nums"
+                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#26262b] bg-white dark:bg-[#18181b] text-xs font-medium tabular-nums"
                 />
                 <span className="text-[10px] text-slate-400 block pt-0.5">
                   Offline detection threshold
@@ -276,7 +276,7 @@ export const SettingsPage: React.FC = () => {
               </div>
 
               {/* Theme Preference */}
-              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#27272a] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
+              <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-[#26262b] bg-slate-50/70 dark:bg-[#18181b] space-y-1">
                 <label className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block">
                   Interface Theme
                 </label>
@@ -290,7 +290,7 @@ export const SettingsPage: React.FC = () => {
                     className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-medium border cursor-pointer transition-all ${
                       theme === 'dark'
                         ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-transparent font-semibold'
-                        : 'bg-white dark:bg-[#141519] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-[#27272a]'
+                        : 'bg-white dark:bg-[#18181b] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-[#26262b]'
                     }`}
                   >
                     <Moon className="w-3.5 h-3.5" />
@@ -305,7 +305,7 @@ export const SettingsPage: React.FC = () => {
                     className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-medium border cursor-pointer transition-all ${
                       theme === 'light'
                         ? 'bg-slate-900 text-white border-transparent font-semibold'
-                        : 'bg-white dark:bg-[#141519] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-[#27272a]'
+                        : 'bg-white dark:bg-[#18181b] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-[#26262b]'
                     }`}
                   >
                     <Sun className="w-3.5 h-3.5" />
@@ -323,8 +323,8 @@ export const SettingsPage: React.FC = () => {
 
       {/* Tab 2: Alarm Threshold Rules */}
       {activeTab === 'alarms' && (
-        <Card className="p-5 bg-white dark:bg-[#141519] border-slate-200/80 dark:border-[#27272a] shadow-xs space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-[#27272a]">
+        <Card className="p-5 bg-white dark:bg-[#18181b] border-slate-200/80 dark:border-[#26262b] shadow-xs space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-[#26262b]">
             <div className="flex items-center gap-2">
               <Bell className="w-4 h-4 text-slate-400" />
               <h3 className="font-semibold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-wider">
@@ -340,7 +340,7 @@ export const SettingsPage: React.FC = () => {
             {alarmRules.map((rule) => (
               <div
                 key={rule.id}
-                className="p-4 rounded-xl border border-slate-200/80 dark:border-[#27272a] bg-slate-50/70 dark:bg-[#18181b] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                className="p-4 rounded-xl border border-slate-200/80 dark:border-[#26262b] bg-slate-50/70 dark:bg-[#18181b] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
               >
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2">
@@ -368,7 +368,7 @@ export const SettingsPage: React.FC = () => {
                           handleRuleThresholdChange(rule.id, val);
                         }
                       }}
-                      className="w-20 px-2 py-1 rounded border border-slate-200 dark:border-[#27272a] bg-white dark:bg-[#141519] text-xs font-mono font-bold tabular-nums text-right"
+                      className="w-20 px-2 py-1 rounded border border-slate-200 dark:border-[#26262b] bg-white dark:bg-[#18181b] text-xs font-mono font-bold tabular-nums text-right"
                     />
                   </div>
 

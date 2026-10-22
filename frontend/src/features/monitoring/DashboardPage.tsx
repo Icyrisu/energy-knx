@@ -44,41 +44,42 @@ export const DashboardPage: React.FC = () => {
       {/* Top Row: Executive Stat Cards (Solid Clean Aesthetics) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Card 1: Total Real-Time Power */}
-        <Card className="p-5 bg-white dark:bg-[#141519] border border-slate-200/80 dark:border-[#27272a] shadow-xs flex items-center justify-between">
+        <Card className="p-5 bg-white dark:bg-[#18181b] border border-slate-200/80 dark:border-[#26262b] shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+            <span className="text-xs font-medium text-slate-500 dark:text-[#797979]">
               Total Active Power
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-normal text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
+              <span className="text-2xl sm:text-3xl font-normal text-slate-900 dark:text-[#ffffff] tracking-tight tabular-nums">
                 {combinedPower > 0 ? formatNumber(combinedPower, 1) : '—'}
               </span>
-              <span className="text-xs font-semibold text-slate-400">W</span>
+              <span className="text-xs font-semibold text-[#797979]">W</span>
             </div>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-[#aef31e] text-black flex items-center justify-center shrink-0 shadow-sm">
-            <Zap className="w-6 h-6 text-black fill-black" />
+          <div className="w-12 h-12 rounded-2xl bg-[#2f31f5] text-white flex items-center justify-center shrink-0 shadow-sm shadow-[#2f31f5]/25">
+            <Zap className="w-6 h-6 text-[#dbf059] fill-[#dbf059]" />
           </div>
         </Card>
 
         {/* Card 2: Total Active Energy */}
-        <Card className="p-5 bg-white dark:bg-[#141519] border border-slate-200/80 dark:border-[#27272a] shadow-xs flex items-center justify-between">
+        <Card className="p-5 bg-white dark:bg-[#18181b] border border-slate-200/80 dark:border-[#26262b] shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+            <span className="text-xs font-medium text-slate-500 dark:text-[#797979]">
               Total Active Energy
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-normal text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
+              <span className="text-2xl sm:text-3xl font-normal text-slate-900 dark:text-[#ffffff] tracking-tight tabular-nums">
                 {combinedEnergy > 0 ? formatNumber(combinedEnergy, 1) : '—'}
               </span>
-              <span className="text-xs font-semibold text-slate-400">kWh</span>
+              <span className="text-xs font-semibold text-[#797979]">kWh</span>
             </div>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center shrink-0 shadow-sm">
-            <Activity className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-2xl bg-[#dbf059] text-[#131314] flex items-center justify-center shrink-0 shadow-sm shadow-[#dbf059]/25">
+            <Activity className="w-6 h-6 text-[#131314]" />
           </div>
         </Card>
       </div>
+
 
       {/* Middle Row: Two 3-Phase Power Meters (28 Parameters) */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">

@@ -1,70 +1,79 @@
 @import "tailwindcss";
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-electric-blue: #2f31f5;
+  --color-brand-lime: #dbf059;
+  --color-chinese-black: #131314;
+  --color-platinum: #ebebe9;
+  --color-medium-gray: #797979;
+}
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 240 10% 6%;
+    --background: 60 4% 96%;
+    --foreground: 240 3% 8%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 6%;
+    --card-foreground: 240 3% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 6%;
-    --primary: 79 91% 54%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 210 20% 95%;
-    --secondary-foreground: 240 10% 10%;
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 79 91% 54%;
-    --accent-foreground: 0 0% 0%;
+    --popover-foreground: 240 3% 8%;
+    --primary: 239 91% 57%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 60 4% 92%;
+    --secondary-foreground: 240 3% 8%;
+    --muted: 60 4% 92%;
+    --muted-foreground: 0 0% 47%;
+    --accent: 71 83% 65%;
+    --accent-foreground: 240 3% 8%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 79 91% 54%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 4% 88%;
+    --input: 60 4% 88%;
+    --ring: 239 91% 57%;
     --radius: 0.75rem;
 
-    --sidebar-bg: #121316;
-    --sidebar-border: #1f2024;
-    --sidebar-text: #94a3b8;
+    --sidebar-bg: #131314;
+    --sidebar-border: #222226;
+    --sidebar-text: #797979;
     --sidebar-text-active: #ffffff;
 
     --phase-r: #ef4444;
     --phase-s: #f59e0b;
-    --phase-t: #3b82f6;
-    --phase-kwh: #aef31e;
+    --phase-t: #2f31f5;
+    --phase-kwh: #dbf059;
   }
 
   .dark {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 7%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 7%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 79 91% 54%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 240 6% 14%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 6% 14%;
-    --muted-foreground: 240 5% 65%;
-    --accent: 79 91% 54%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 6% 16%;
-    --input: 240 6% 16%;
-    --ring: 79 91% 54%;
+    --background: 240 3% 7%;
+    --foreground: 0 0% 100%;
+    --card: 240 3% 9%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 3% 9%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 239 91% 57%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 3% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 3% 14%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 71 83% 65%;
+    --accent-foreground: 240 3% 8%;
+    --destructive: 0 63% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 3% 18%;
+    --input: 240 3% 18%;
+    --ring: 239 91% 57%;
 
-    --sidebar-bg: #0d0e11;
-    --sidebar-border: #1a1b1f;
-    --sidebar-text: #8e95a5;
+    --sidebar-bg: #131314;
+    --sidebar-border: #222226;
+    --sidebar-text: #797979;
     --sidebar-text-active: #ffffff;
 
     --phase-r: #f87171;
     --phase-s: #fbbf24;
-    --phase-t: #60a5fa;
-    --phase-kwh: #34d399;
+    --phase-t: #6366f1;
+    --phase-kwh: #dbf059;
   }
 
   body {
@@ -89,9 +98,9 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
+  background: rgba(121, 121, 121, 0.25);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.4);
+  background: rgba(121, 121, 121, 0.45);
 }

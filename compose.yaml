@@ -51,7 +51,7 @@ services:
       DATABASE_URL: ${DATABASE_URL:-postgresql://energy_user:energy_secure_password_123!@database:5432/energy_scada}
       NODERED_URL: http://nodered:1880
       INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-energy-scada-internal-secret-token-change-in-prod}
-      ENERGY_SOURCE_MODE: ${ENERGY_SOURCE_MODE:-simulation}
+      ENERGY_SOURCE_MODE: ${ENERGY_SOURCE_MODE:-modbus}
       HISTORY_INTERVAL_SECONDS: ${HISTORY_INTERVAL_SECONDS:-60}
       STALE_AFTER_SECONDS: ${STALE_AFTER_SECONDS:-10}
       HISTORY_RETENTION_DAYS: ${HISTORY_RETENTION_DAYS:-1}
@@ -83,16 +83,17 @@ services:
       NODE_OPTIONS: "--max-old-space-size=128"
       BACKEND_URL: http://backend:3000
       INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-energy-scada-internal-secret-token-change-in-prod}
-      ENERGY_SOURCE_MODE: ${ENERGY_SOURCE_MODE:-simulation}
+      ENERGY_SOURCE_MODE: ${ENERGY_SOURCE_MODE:-modbus}
       TELEMETRY_INTERVAL_MS: ${TELEMETRY_INTERVAL_MS:-1000}
       POLL_INTERVAL_MS: ${POLL_INTERVAL_MS:-1000}
       MODBUS_HOST: ${MODBUS_HOST:-127.0.0.1}
       MODBUS_PORT: ${MODBUS_PORT:-502}
       NODE_RED_CREDENTIAL_SECRET: ${NODE_RED_CREDENTIAL_SECRET:-node-red-credential-secret-key-32chars}
     ports:
-      - "127.0.0.1:${NODE_RED_PORT:-1880}:1880"
+      - "${NODE_RED_PORT:-1880}:1880"
     volumes:
       - ./nodered/data:/data
+
     depends_on:
       backend:
         condition: service_healthy

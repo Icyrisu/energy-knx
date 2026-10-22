@@ -10,8 +10,9 @@ const envSchema = z.object({
     process.env.INTERNAL_API_SECRET || 'energy-scada-internal-secret-token-change-in-prod'
   ),
   NODERED_URL: z.string().default(process.env.NODERED_URL || 'http://nodered:1880'),
-  ENERGY_SOURCE_MODE: z.enum(['simulation', 'device', 'off']).default('simulation'),
+  ENERGY_SOURCE_MODE: z.enum(['simulation', 'device', 'modbus', 'off']).default('modbus'),
   HISTORY_INTERVAL_SECONDS: z.coerce.number().min(5).default(60),
+
   STALE_AFTER_SECONDS: z.coerce.number().min(3).default(10),
   HISTORY_RETENTION_DAYS: z.coerce.number().default(1),
   MIGRATE_ON_START: z.preprocess((val) => val === 'true' || val === true || val === '1', z.boolean()).default(true),

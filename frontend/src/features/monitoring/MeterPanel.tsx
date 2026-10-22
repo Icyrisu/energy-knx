@@ -20,22 +20,23 @@ const MeterPanelComponent: React.FC<MeterPanelProps> = ({ snapshot }) => {
   const colKwh = METER_PARAMETERS.filter((p) => p.group === 'energy');
 
   return (
-    <Card className="p-5 sm:p-6 bg-white dark:bg-[#141519] border-slate-200/80 dark:border-[#27272a] shadow-xs flex flex-col justify-between">
+    <Card className="p-5 sm:p-6 bg-white dark:bg-[#18181b] border-slate-200/80 dark:border-[#26262b] shadow-xs flex flex-col justify-between">
       {/* Header without loud badges */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-[#27272a] mb-4">
+      <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-[#26262b] mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 flex items-center justify-center">
-            <Cpu className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-[#202025] text-slate-700 dark:text-[#ffffff] border border-slate-200 dark:border-[#2f31f5]/30 flex items-center justify-center">
+            <Cpu className="w-4 h-4 text-[#2f31f5] dark:text-[#6a6cff]" />
           </div>
           <div>
-            <h3 className="font-bold text-base text-slate-900 dark:text-slate-100 tracking-tight">
+            <h3 className="font-bold text-base text-slate-900 dark:text-[#ffffff] tracking-tight">
               {snapshot.meterName}
             </h3>
-            <span className="text-[11px] font-medium text-slate-400">
+            <span className="text-[11px] font-medium text-[#797979]">
               {snapshot.tag}
             </span>
           </div>
         </div>
+
 
         {/* Minimal indicator if offline/stale */}
         {isOffline && (

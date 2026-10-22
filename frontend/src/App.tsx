@@ -13,6 +13,9 @@ const AnalyticsPage = lazy(() =>
 const ControlPage = lazy(() =>
   import('./features/control/ControlPage').then((m) => ({ default: m.ControlPage }))
 );
+const SettingsPage = lazy(() =>
+  import('./features/settings/SettingsPage').then((m) => ({ default: m.SettingsPage }))
+);
 
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[360px] text-xs text-slate-400">
@@ -59,8 +62,14 @@ export const App: React.FC = () => {
                   </Suspense>
                 }
               />
-              {/* Lock out Settings in Web Demo Mode */}
-              <Route path="settings" element={<Navigate to="/" replace />} />
+              <Route
+                path="settings"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SettingsPage />
+                  </Suspense>
+                }
+              />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>
@@ -69,3 +78,4 @@ export const App: React.FC = () => {
     </ThemeProvider>
   );
 };
+

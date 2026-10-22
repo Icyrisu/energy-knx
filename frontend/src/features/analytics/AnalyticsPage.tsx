@@ -137,18 +137,19 @@ export const AnalyticsPage: React.FC = () => {
 
   // --- Prepare ECharts Option ---
   const isDark = theme === 'dark';
-  const gridLineColor = isDark ? '#27272a' : '#f1f5f9';
-  const textColor = isDark ? '#a1a1aa' : '#64748b';
+  const gridLineColor = isDark ? '#26262b' : '#ebebe9';
+  const textColor = isDark ? '#797979' : '#64748b';
 
-  const palette = ['#aef31e', '#38bdf8', '#fbbf24', '#f87171', '#c084fc', '#34d399'];
+  const palette = ['#2f31f5', '#dbf059', '#38bdf8', '#fbbf24', '#f87171', '#34d399'];
   const areaPalette = [
-    { start: 'rgba(174, 243, 30, 0.28)', end: 'rgba(174, 243, 30, 0.0)' },
+    { start: 'rgba(47, 49, 245, 0.35)', end: 'rgba(47, 49, 245, 0.0)' },
+    { start: 'rgba(218, 240, 89, 0.30)', end: 'rgba(218, 240, 89, 0.0)' },
     { start: 'rgba(56, 189, 248, 0.25)', end: 'rgba(56, 189, 248, 0.0)' },
     { start: 'rgba(251, 191, 36, 0.25)', end: 'rgba(251, 191, 36, 0.0)' },
     { start: 'rgba(248, 113, 113, 0.25)', end: 'rgba(248, 113, 113, 0.0)' },
-    { start: 'rgba(192, 132, 252, 0.25)', end: 'rgba(192, 132, 252, 0.0)' },
     { start: 'rgba(52, 211, 153, 0.25)', end: 'rgba(52, 211, 153, 0.0)' },
   ];
+
 
   const allTimestamps = Array.from(
     new Set(trendData?.series.flatMap((s) => s.data.map((d) => d.timestamp)) || [])
