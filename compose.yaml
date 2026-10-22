@@ -90,7 +90,7 @@ services:
       MODBUS_PORT: ${MODBUS_PORT:-502}
       NODE_RED_CREDENTIAL_SECRET: ${NODE_RED_CREDENTIAL_SECRET:-node-red-credential-secret-key-32chars}
     ports:
-      - "${NODE_RED_PORT:-1880}:1880"
+      - "127.0.0.1:${NODE_RED_PORT:-1880}:1880"
     volumes:
       - ./nodered/data:/data
     depends_on:
