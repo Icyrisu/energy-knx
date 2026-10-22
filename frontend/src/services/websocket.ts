@@ -15,6 +15,23 @@ class WebSocketClient {
   private shouldReconnect: boolean = true;
   private status: WsConnectionStatus = 'disconnected';
 
+  constructor() {
+    if (typeof window !== 'undefined') {
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && this.shouldReconnect) {
+          if (!this.ws || this.ws.readyState === WebSocket.CLOSED || this.ws.readyState === WebSocket.CLOSING) {
+            this.connect();
+          }
+        }
+      });
+      window.addEventListener('online', () => {
+        if (this.shouldReconnect) {
+          this.connect();
+        }
+      });
+    }
+  }
+
   public connect() {
     if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) {
       return;

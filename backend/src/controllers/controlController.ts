@@ -24,7 +24,7 @@ export async function writeControlPoint(req: Request, res: Response): Promise<vo
       type: 'control-update',
       payload: {
         tag,
-        value,
+        value: numericVal,
         timestamp: new Date().toISOString(),
       },
     });

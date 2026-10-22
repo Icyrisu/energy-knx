@@ -94,12 +94,12 @@ export const ControlPage: React.FC = () => {
   useEffect(() => {
     loadData();
 
-    // Connect WebSocket and listen for real-time control updates across devices
+    // 1. Connect WebSocket and listen for real-time control updates across devices
     wsClient.connect();
     const unsub = wsClient.onMessage((msg) => {
       if (msg.type === 'control-update') {
         const { tag, value } = msg.payload;
-        const isLampOn = value === 1 || value === true;
+        const isLampOn = Number(value) === 1 || value === true;
         setLampStates((prev) => {
           const next = { ...prev, [tag]: isLampOn };
           try {
@@ -115,8 +115,45 @@ export const ControlPage: React.FC = () => {
       }
     });
 
+    // 2. Failsafe auto-sync polling every 2s in case mobile network/browser sleeps WebSocket
+    const syncInterval = setInterval(() => {
+      api.getControlLogs().then((lg) => {
+        if (Array.isArray(lg) && lg.length > 0) {
+          setLogs(lg);
+          const seen = new Set<string>();
+          const fromLatestLogs: Record<string, boolean> = {};
+
+          for (const log of lg) {
+            if (!seen.has(log.tag) && log.success) {
+              seen.add(log.tag);
+              fromLatestLogs[log.tag] = log.value === 1;
+            }
+          }
+
+          setLampStates((prev) => {
+            let changed = false;
+            for (const [k, v] of Object.entries(fromLatestLogs)) {
+              if (prev[k] !== v) {
+                changed = true;
+                break;
+              }
+            }
+            if (!changed) return prev;
+            const next = { ...prev, ...fromLatestLogs };
+            try {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+            } catch {
+              // ignore
+            }
+            return next;
+          });
+        }
+      }).catch(() => {});
+    }, 2000);
+
     return () => {
       unsub();
+      clearInterval(syncInterval);
     };
   }, []);
 
