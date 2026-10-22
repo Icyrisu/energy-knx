@@ -1,0 +1,27 @@
+{
+  "name": "energy-scada-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Industrial 3-Phase Energy SCADA Dashboard monorepo",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "keywords": [
+    "scada",
+    "energy",
+    "power-meter",
+    "modbus-tcp",
+    "node-red",
+    "monitoring"
+  ],
+  "author": "Antigravity SCADA Team",
+  "license": "UNLICENSED"
+}

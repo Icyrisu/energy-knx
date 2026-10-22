@@ -1,0 +1,19 @@
+node_modules/
+backend/dist/
+shared/dist/
+build/
+.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+scratch_skill.txt
+
+# Node-RED credentials & runtime generated files
+nodered/data/.config.runtime.json
+nodered/data/.config.users.json
+nodered/data/.flows.json.backup
+nodered/data/flows_cred.json
+nodered/data/.sessions.json

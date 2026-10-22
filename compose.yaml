@@ -1,0 +1,127 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "5m"
+    max-file: "2"
+
+services:
+  database:
+    image: postgres:17-alpine
+    container_name: database
+    restart: unless-stopped
+    command: >
+      postgres
+      -c shared_buffers=32MB
+      -c max_connections=20
+      -c work_mem=2MB
+      -c maintenance_work_mem=16MB
+      -c effective_cache_size=96MB
+      -c wal_buffers=1MB
+      -c max_wal_size=256MB
+      -c synchronous_commit=off
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-energy_scada}
+      POSTGRES_USER: ${POSTGRES_USER:-energy_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-energy_secure_password_123!}
+      TZ: ${TZ:-Asia/Jakarta}
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    networks:
+      - energy-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-energy_user} -d ${POSTGRES_DB:-energy_scada}"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+      start_interval: 2s
+    mem_limit: 256m
+    logging: *default-logging
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NODE_OPTIONS: "--max-old-space-size=96"
+      DATABASE_URL: ${DATABASE_URL:-postgresql://energy_user:energy_secure_password_123!@database:5432/energy_scada}
+      NODERED_URL: http://nodered:1880
+      INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-energy-scada-internal-secret-token-change-in-prod}
+      ENERGY_SOURCE_MODE: ${ENERGY_SOURCE_MODE:-simulation}
+      HISTORY_INTERVAL_SECONDS: ${HISTORY_INTERVAL_SECONDS:-60}
+      STALE_AFTER_SECONDS: ${STALE_AFTER_SECONDS:-10}
+      HISTORY_RETENTION_DAYS: ${HISTORY_RETENTION_DAYS:-0}
+      MIGRATE_ON_START: ${MIGRATE_ON_START:-true}
+      TZ: ${TZ:-Asia/Jakarta}
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - energy-net
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+      start_interval: 2s
+    mem_limit: 160m
+    logging: *default-logging
+
+  nodered:
+    build:
+      context: ./nodered
+      dockerfile: Dockerfile
+    container_name: nodered
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Asia/Jakarta}
+      NODE_OPTIONS: "--max-old-space-size=128"
+      BACKEND_URL: http://backend:3000
+      INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-energy-scada-internal-secret-token-change-in-prod}
+      ENERGY_SOURCE_MODE: ${ENERGY_SOURCE_MODE:-simulation}
+      TELEMETRY_INTERVAL_MS: ${TELEMETRY_INTERVAL_MS:-1000}
+      POLL_INTERVAL_MS: ${POLL_INTERVAL_MS:-1000}
+      MODBUS_HOST: ${MODBUS_HOST:-127.0.0.1}
+      MODBUS_PORT: ${MODBUS_PORT:-502}
+      NODE_RED_CREDENTIAL_SECRET: ${NODE_RED_CREDENTIAL_SECRET:-node-red-credential-secret-key-32chars}
+    ports:
+      - "${NODE_RED_PORT:-1880}:1880"
+    volumes:
+      - ./nodered/data:/data
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - energy-net
+    mem_limit: 256m
+    logging: *default-logging
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "${FE_PORT:-8080}:80"
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - energy-net
+    mem_limit: 32m
+    logging: *default-logging
+
+networks:
+  energy-net:
+    driver: bridge
+
+volumes:
+  database-data:
